@@ -7,6 +7,9 @@ function openMenu(el) {
 
 var defaultResolution = [1495, 746]
 var userResolution = [window.innerWidth, window.innerHeight]
+
+document.querySelector("h1").innerText = `Your Res: ${userResolution} / Default Res: ${defaultResolution}`
+
 var coordinates = [
     {
         "x": 83,
