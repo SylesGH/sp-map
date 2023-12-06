@@ -7,8 +7,12 @@ function openMenu(el) {
 
 var defaultResolution = [1495, 746]
 var userResolution = [window.innerWidth, window.innerHeight]
+var resolutionRatio = {
+    X: defaultResolution[0] / userResolution[0],
+    Y: defaultResolution[1] / userResolution[1],
+}
 
-document.querySelector("h1").innerText = `Your Res: ${userResolution} / Default Res: ${defaultResolution}`
+/* TODO: NEED A FIX 
 
 var coordinates = [
     {
@@ -342,9 +346,9 @@ var coordinates = [
 ]
 
 coordinates.forEach(cor => {
-    var span = `<span class="pin" style="left: ${cor.x}px; top: ${cor.y}px;"></span>`
+    var span = `<span class="pin" style="left: ${cor.x * resolutionRatio.X}px; top: ${(cor.y * resolutionRatio.Y) + ((window.innerHeight - document.querySelector(".container img").clientHeight) / 2 )}px;"></span>`
     document.querySelector(".container").innerHTML += span
-})
+}) */
 
 // debug
 function debugMode() {
@@ -392,5 +396,11 @@ function debugMode() {
     }   
 }
 
-//temp
-console.log(window.innerWidth, window.innerHeight)
+document.addEventListener("click", (e) => {
+    if (e.target == document.querySelector("img")) {
+        document.querySelector(".player").style = `
+            top: ${e.clientY}px;
+            left: ${e.clientX}px;
+        ` 
+    }
+});
