@@ -5,6 +5,8 @@ function openMenu(el) {
     el.classList.toggle("active");
 }
 
+var defaultResolution = [1495, 746]
+var userResolution = [window.innerWidth, window.innerHeight]
 var coordinates = [
     {
         "x": 83,
@@ -386,3 +388,6 @@ function debugMode() {
         })
     }   
 }
+
+//temp
+console.log(window.innerWidth, window.innerHeight)
