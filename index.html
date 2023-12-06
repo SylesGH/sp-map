@@ -4,8 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+
+    <script src="index.js" defer async></script>
 </head>
 <body>
-        
+    <div class="container">
+        <img src="map.png" alt="opss :/ (try reloading)">
+    </div>
+    <div class="menu-btn" onclick="openMenu(this)">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="cross"></div>
+        <div class="cross"></div>
+    </div>
+    <div class="menu"></div>
+    <div class="indicator">
+        <label>Coordinates</label>
+        <span id="coordinates"></span>
+    </div>
 </body>
 </html>
