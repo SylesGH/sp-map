@@ -18,9 +18,23 @@
 <body>
     <div class="container">
         <img src="map.png" alt="opss :/ (try reloading)" draggable="false">
-        <div class="player"></div>
+        <div class="destination">
+            <i class="fa-solid fa-flag"></i>
+        </div>
+        <div class="player" style="top: 90px; left: 140px;">
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
     </div>
-    <div class="menu-btn" onclick="openMenu(this)">
+
+    <div class="floting-play-btn" onclick="playGame()">
+        <i class="fa-solid fa-play"></i>
+    </div>
+
+    <div class="reroll-btn btn" onclick="placeDestination(destination); animated(this)" title="Hedefi sıfırla">
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+    </div>
+
+    <div class="menu-btn btn" onclick="openMenu(this); hideTutorial()">
         <div class="line"></div>
         <div class="line"></div>
         <div class="line"></div>
@@ -28,8 +42,9 @@
         <div class="cross"></div>
     </div>
     <div class="menu">
+        <p>Karelere tıklayarak karakterinin gideceği rotayı belirleyebilirsin.</p>
         <div class="grid">
-            <div class="slot full">
+            <div class="slot">
                 <span class="block up">
                     <i class="fa-solid fa-arrow-up"></i>
                 </span>
@@ -43,7 +58,7 @@
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
             </div>
-            <div class="slot full">
+            <div class="slot">
                 <span class="block up">
                     <i class="fa-solid fa-arrow-up"></i>
                 </span>
@@ -57,7 +72,7 @@
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
             </div>
-            <div class="slot full">
+            <div class="slot">
                 <span class="block up">
                     <i class="fa-solid fa-arrow-up"></i>
                 </span>
@@ -71,7 +86,7 @@
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
             </div>
-            <div class="slot full">
+            <div class="slot">
                 <span class="block up">
                     <i class="fa-solid fa-arrow-up"></i>
                 </span>
@@ -85,7 +100,7 @@
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
             </div>
-            <div class="slot full">
+            <div class="slot">
                 <span class="block up">
                     <i class="fa-solid fa-arrow-up"></i>
                 </span>
@@ -99,12 +114,110 @@
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
             </div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
+            <div class="slot">
+                <span class="block up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </span>
+                <span class="block down">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </span>
+                <span class="block left">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </span>
+                <span class="block right">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </div>
+            <div class="slot">
+                <span class="block up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </span>
+                <span class="block down">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </span>
+                <span class="block left">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </span>
+                <span class="block right">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </div>
+            <div class="slot">
+                <span class="block up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </span>
+                <span class="block down">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </span>
+                <span class="block left">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </span>
+                <span class="block right">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </div>
+            <div class="slot">
+                <span class="block up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </span>
+                <span class="block down">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </span>
+                <span class="block left">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </span>
+                <span class="block right">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </div>
+            <div class="slot">
+                <span class="block up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </span>
+                <span class="block down">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </span>
+                <span class="block left">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </span>
+                <span class="block right">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </div>
         </div>
+        <div class="buttons">
+            <span class="play" onclick="playGame()">
+                <i class="fa-solid fa-play"></i>
+                <p>Oynat</p>
+            </span>
+            <span class="reset" onclick="clearSlots()">
+                <i class="fa-solid fa-trash"></i>
+                <p>Temizle</p>
+            </span>
+        </div>
+    </div>
+
+    <div class="popup hidden">
+        <div class="mesh">
+            <h1>Tebrikler</h1>
+            <p>Başarıyla hedef noktasına başarıyla ulaştın!🎉</p>
+            <span class="main-btn" onclick="restartGame()">Tekrar Oyna</span>
+        </div>
+    </div>
+
+    <div class="information">
+        <div class="user-location">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Burdasın</p>
+        </div>
+        <div class="destination-point">
+            <i class="fa-solid fa-flag"></i>
+            <p>Gitmen gereken yer</p>
+        </div>
+    </div>
+
+    <div class="tutorial-card">
+        <p>Buradan karakterinin rotasını belirleyebilirsin.</p>
     </div>
 
     <div class="indicator">

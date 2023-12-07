@@ -1,5 +1,8 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 :root {
@@ -8,10 +11,7 @@
 }
 
 body {
-    margin: 0;
-    padding: 0;
     overflow: hidden;
-    font-family: 'Poppins', sans-serif;
 }
 
 /* map */
@@ -31,11 +31,9 @@ body {
     width: 100%;
 }
 
-/* menu */
-.menu-btn {
+/* btns */
+.btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
     height: 50px;
     width: 50px;
     background: white;
@@ -47,6 +45,31 @@ body {
     justify-content: space-evenly;
     padding: .6rem .5rem;
     z-index: 2;
+}
+
+.menu-btn {
+    top: 20px;
+    right: 20px;
+}
+
+.reroll-btn {
+    top: 20px;
+    right: 80px;
+    font-size: 1.6rem;
+}
+
+.reroll-btn.animate i {
+    animation: retate .8s var(--custom-ease);
+}
+
+@keyframes retate {
+    from {
+        transform: rotateZ(0);
+    }
+
+    to {
+        transform: rotateZ(-360deg);
+    }
 }
 
 .menu-btn .line, .menu-btn .cross {
@@ -145,12 +168,16 @@ body {
     top: 0;
     right: 0;
     height: 100%;
-    width: 30vw;
+    width: 28rem;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     transition: .5s;
     z-index: 1;
     padding: 5.5rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
 }
 
 .menu-btn:not(.active) + .menu {
@@ -175,6 +202,8 @@ body {
     border: 1px solid rgb(0, 0, 0);
     box-shadow: 0 0 6px rgba(123, 123, 123, 1) inset;
     overflow: hidden;
+    position: relative;
+    cursor: pointer;
 }
 
 .grid .slot.full {
@@ -190,22 +219,195 @@ body {
     justify-content: center;
     font-size: 2.5rem;
     transform: translateY(0%);
+    position: absolute;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+    transition: .5s;
 }
 
 .grid .slot .block.right {
+    transform: translateX(-100%) scaleX(.5);
     background: #B3F5BC;
 }
 
 .grid .slot .block.left {
+    transform: translateX(100%) scaleX(.5);
     background: #F9FFB5;
 }
 
 .grid .slot .block.up {
+    transform: translateY(100%) scaleY(.5);
     background: #FA9189;
 }
 
 .grid .slot .block.down {
+    transform: translateY(-100%) scaleY(.5);
     background: #D6F6FF;
+}
+
+.grid .slot[data-block="up"] .block.up,
+.grid .slot[data-block="down"] .block.down,
+.grid .slot[data-block="left"] .block.left,
+.grid .slot[data-block="right"] .block.right {
+    transform: translateX(0);
+}
+
+.destination {
+    position: absolute;
+    aspect-ratio: 1;
+    font-size: 1.5rem;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    color: rgb(255, 73, 73);
+}
+
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, .8);
+    backdrop-filter: blur(3px);
+    z-index: 3;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+.popup .mesh {
+    width: 400px;
+    background: white;
+    border-radius: var(--rounding);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    gap: 1rem;
+}
+
+.main-btn {
+    padding: .5rem 1rem;
+    background: rgb(215, 247, 255);
+    border-radius: var(--rounding);
+    cursor: pointer;
+    user-select: none;
+    transition: .1s;
+}
+
+.main-btn:active {
+    scale: .9;
+    filter: brightness(.9) saturate(1.5);
+}
+
+.information {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    background: white;
+    padding: .75rem 1rem;
+    border-radius: var(--rounding);
+}
+
+.information > * {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.information p {
+    font-size: 1rem;
+}
+
+.tutorial-card {
+    position: absolute;
+    top: 85px;
+    right: 10px;
+    height: 80px;
+    width: 300px;
+    padding: 1rem;
+    background: white;
+    border-radius: var(--rounding);
+    text-align: center;
+    transition: .3s;
+}
+
+.tutorial-card::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 28px;
+    top: -5px;
+    height: 15px;
+    aspect-ratio: 1;
+    background: white;
+    transform: rotateZ(45deg);
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.buttons > * {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
+    padding: .6rem 1rem;
+    border-radius: var(--rounding);
+    cursor: pointer;
+    transition: .1s;
+}
+
+.buttons > *:active {
+    scale: 0.9;
+    filter: brightness(0.7);
+}
+
+.buttons .play {
+    background: rgba(0, 255, 89, 0.4);
+}
+
+.buttons .reset {
+    background: rgba(255, 73, 73, 0.4);
+}
+
+.floting-play-btn {
+    height: 50px;
+    aspect-ratio: 1;
+    border-radius: var(--rounding);
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(177, 255, 204, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 2px solid rgba(0, 255, 89, 0.4);
+    transition: .1s;
+}
+
+.floting-play-btn:active {
+    scale: .9;
+    filter: brightness(.9);
 }
 
 /* temp */
@@ -238,11 +440,10 @@ body {
 
 .player {
     position: absolute;
-    top: 90px;
-    left: 140px;
-    background: red;
-    height: 20px;
-    width: 20px;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -80%);
+    pointer-events: none;
+    font-size: 2rem;
+    color: rgb(0, 166, 255);
+    transition: 1.2s;
 }
