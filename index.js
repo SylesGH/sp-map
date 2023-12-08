@@ -337,7 +337,7 @@ function playGame(el) {
 
             player.style = `top: ${playerFrames[i].direction == "y" ? playerFrames[i].amount : lastY}px; left: ${playerFrames[i].direction == "x" ? playerFrames[i].amount : lastX}px`;
 
-            gameState = calcRange(playerCoord, currentDestination, steps)
+            gameState = calcRange(playerCoord, currentDestination, steps / 2)
             
             if (gameState) {
                 setTimeout(() => {
