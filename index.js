@@ -50,6 +50,31 @@ function calcRange(obj1, obj2, radius) {
 }
 
 function placeDestination(el, saveto) {
+    var player = document.querySelector(".player")
+
+    var playerCoord = {
+        x: parseInt(player.style.left),
+        y: parseInt(player.style.top),
+    }
+
+    var steps = Math.floor(((window.innerHeight / 10) + (window.innerWidth / 10)) / 1.8)
+
+    while (calcRange(playerCoord, currentDestination, steps / 2)) {
+        userResolution = [window.innerWidth, window.innerHeight]
+        var pinProperties = {
+            coordX: Math.floor(Math.random() * (userResolution[0] - 100)) + 50,
+            coordY: Math.floor(Math.random() * (userResolution[1] - 400)) + 200,
+        }
+
+        range[1].x = pinProperties.coordX
+        range[1].y = pinProperties.coordY
+
+        el.style = `left: ${pinProperties.coordX}px; top: ${pinProperties.coordY}px;`
+
+        saveto.x = pinProperties.coordX
+        saveto.y = pinProperties.coordY
+    }
+
     userResolution = [window.innerWidth, window.innerHeight]
     var pinProperties = {
         coordX: Math.floor(Math.random() * (userResolution[0] - 100)) + 50,
@@ -58,16 +83,20 @@ function placeDestination(el, saveto) {
 
     range[1].x = pinProperties.coordX
     range[1].y = pinProperties.coordY
-    
+
     el.style = `left: ${pinProperties.coordX}px; top: ${pinProperties.coordY}px;`
 
     saveto.x = pinProperties.coordX
     saveto.y = pinProperties.coordY
 }
 
-placeDestination(destination, currentPlayerPos)
-placeDestination(destination, currentDestination)
-resetGame()
+function setGame() {
+    placeDestination(destination, currentPlayerPos)
+    placeDestination(destination, currentDestination)
+    resetGame()   
+}
+
+setGame()
 
 slots.forEach((slot, index) => {
     new MutationObserver(() => {

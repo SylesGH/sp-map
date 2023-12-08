@@ -494,7 +494,8 @@ body {
 }
 
 .amblem {
-    pointer-events: none;
+    cursor: pointer;
+    user-select: none;
     position: absolute;
     top: .5rem;
     left: 50%;
