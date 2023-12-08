@@ -53,7 +53,11 @@ slots.forEach((slot, index) => {
         updateDataBlocks();
     }).observe(slot, { attributes: true, attributeFilter: ['data-block'] });
 
-    var moveset = JSON.parse(localStorage.getItem("block moveset"))
+    try {
+        var moveset = JSON.parse(localStorage.getItem("block moveset"))
+    } catch (e) {
+        
+    }
 
     setTimeout(() => {
         if (moveset) {
@@ -61,7 +65,11 @@ slots.forEach((slot, index) => {
         }
     }, 1000);
 
-    slot.setAttribute("data-block", moveset[index]) || slot.setAttribute("data-index", 0)
+    try {
+        slot.setAttribute("data-block", moveset[index])
+    } catch (e) {
+        slot.setAttribute("data-index", 0)
+    }
 
     slot.addEventListener("click", () => {
         slot.setAttribute("data-index", ((parseInt(slot.getAttribute("data-index")) + 1) % 5))
