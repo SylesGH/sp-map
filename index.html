@@ -16,6 +16,14 @@
     <script src="index.js" defer async></script>
 </head>
 <body>
+    <div class="loading-container">
+        <h1>AIvoyage</h1>
+    </div>
+
+    <div class="amblem">
+        <h2>AIvoyage</h2>
+    </div>
+
     <div class="container">
         <img src="map.png" alt="opss :/ (try reloading)" draggable="false">
         <div class="destination">
@@ -26,11 +34,11 @@
         </div>
     </div>
 
-    <div class="floting-play-btn" onclick="playGame()">
+    <div class="floting-play-btn" onclick="playGame(this)">
         <i class="fa-solid fa-play"></i>
     </div>
 
-    <div class="reroll-btn btn" onclick="placeDestination(destination); animated(this)" title="Hedefi sıfırla">
+    <div class="reroll-btn btn" onclick="resetGame(); animated(this)" title="Hedefi sıfırla">
         <i class="fa-solid fa-arrow-rotate-left"></i>
     </div>
 
@@ -186,7 +194,7 @@
             </div>
         </div>
         <div class="buttons">
-            <span class="play" onclick="playGame()">
+            <span class="play" onclick="playGame(this)">
                 <i class="fa-solid fa-play"></i>
                 <p>Oynat</p>
             </span>
@@ -205,7 +213,14 @@
         </div>
     </div>
 
-    <div class="information">
+    <div class="retry hidden" onclick="resetGame(); popupToggle(this)">
+        <div class="mesh">
+            <h1>Başaramadın</h1>
+            <span class="main-btn fail">Tekrar Dene</span>
+        </div>
+    </div>
+
+    <div class="information"  onclick="informationToggle(this)">
         <div class="user-location">
             <i class="fa-solid fa-location-dot"></i>
             <p>Burdasın</p>
@@ -213,6 +228,9 @@
         <div class="destination-point">
             <i class="fa-solid fa-flag"></i>
             <p>Gitmen gereken yer</p>
+        </div>
+        <div class="help">
+            <i class="fa-solid fa-question"></i>
         </div>
     </div>
 

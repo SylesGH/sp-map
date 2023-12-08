@@ -264,7 +264,7 @@ body {
     color: rgb(255, 73, 73);
 }
 
-.popup {
+.popup, .retry {
     position: absolute;
     top: 0;
     left: 0;
@@ -278,11 +278,11 @@ body {
     z-index: 3;
 }
 
-.popup.hidden {
+.popup.hidden, .retry.hidden {
     display: none;
 }
 
-.popup .mesh {
+.popup .mesh, .retry .mesh {
     width: 400px;
     background: white;
     border-radius: var(--rounding);
@@ -304,6 +304,10 @@ body {
     transition: .1s;
 }
 
+.main-btn.fail {
+    background: rgba(255, 73, 73, 0.466);
+}
+
 .main-btn:active {
     scale: .9;
     filter: brightness(.9) saturate(1.5);
@@ -320,16 +324,40 @@ body {
     background: white;
     padding: .75rem 1rem;
     border-radius: var(--rounding);
+    cursor: pointer;
+    transition: .1s;
+}
+
+.information:active {
+    filter: brightness(.75);
 }
 
 .information > * {
     display: flex;
     align-items: center;
     gap: 1rem;
+    pointer-events: none;
+}
+
+.information :nth-child(3) {
+    display: none;
 }
 
 .information p {
     font-size: 1rem;
+}
+
+.information.minimized {
+    height: 50px;
+    width: 50px;
+}
+
+.information.minimized > * {
+    display: none;
+}
+
+.information.minimized :nth-child(3) {
+    display: flex;
 }
 
 .tutorial-card {
@@ -375,7 +403,7 @@ body {
     transition: .1s;
 }
 
-.buttons > *:active {
+.buttons > *:not(.disabled):active {
     scale: 0.9;
     filter: brightness(0.7);
 }
@@ -401,23 +429,17 @@ body {
     justify-content: center;
     font-size: 1.5rem;
     cursor: pointer;
-    border: 2px solid rgba(0, 255, 89, 0.4);
     transition: .1s;
 }
 
-.floting-play-btn:active {
+.floting-play-btn:not(.disabled):active {
     scale: .9;
     filter: brightness(.9);
 }
 
-/* temp */
-.pin {
-    position: absolute;
-    background: rgb(0, 0, 0);
-    height: 5px;
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
+.disabled {
+    filter: brightness(.5);
+    cursor: not-allowed;
 }
 
 .indicator {
@@ -446,4 +468,38 @@ body {
     font-size: 2rem;
     color: rgb(0, 166, 255);
     transition: 1.2s;
+}
+
+.loading-container {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(12, 12, 12);
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+    z-index: 5;
+    animation: booom 1s 1s forwards;
+}
+
+@keyframes booom {
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.amblem {
+    pointer-events: none;
+    position: absolute;
+    top: .5rem;
+    left: 50%;
+    padding: .5rem 1rem;
+    background: white;
+    border-radius: var(--rounding);
+    transform: translateX(-50%);
 }
